@@ -33,7 +33,7 @@ struct MenuBarIconView: View {
         guard let image = renderer.nsImage else {
             Self.logger.error("Failed to render the menu bar label")
             let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .medium)
-                .applying(NSImage.SymbolConfiguration(hierarchicalColor: .white))
+                .applying(NSImage.SymbolConfiguration(hierarchicalColor: .labelColor))
             let fallback = NSImage(systemSymbolName: "wind", accessibilityDescription: "CoolMyMac")?
                 .withSymbolConfiguration(configuration) ?? NSImage(size: NSSize(width: 14, height: 14))
             fallback.isTemplate = false
@@ -63,8 +63,8 @@ struct MenuBarIconView: View {
         Image(systemName: "wind")
             .symbolRenderingMode(state.dynamicIconEnabled ? .palette : .monochrome)
             .foregroundStyle(
-                state.dynamicIconEnabled ? thermalColor : Color.white,
-                state.dynamicIconEnabled ? thermalColor.opacity(0.6) : Color.white
+                state.dynamicIconEnabled ? thermalColor : Color.primary,
+                state.dynamicIconEnabled ? thermalColor.opacity(0.6) : Color.primary
             )
             .font(.system(size: usesVerticalLayout ? 11 : 14, weight: .medium))
 
@@ -104,7 +104,7 @@ struct MenuBarIconView: View {
                     .lineLimit(1)
             }
             .fixedSize(horizontal: true, vertical: false)
-            .foregroundStyle(.white)
+            .foregroundStyle(Color.primary)
     }
 
     private func readingText(_ value: String) -> some View {
